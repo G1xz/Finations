@@ -457,6 +457,8 @@ form.sign-in-form {
   }
   .hidden {
     opacity: 0;
-    pointer-events: none; /* Garante que não interfira na interação */
+    display: none; /* Garante que ele não fique clicável e não ocupe espaço */
+    pointer-events: none;
   }
+  
   

@@ -11,16 +11,16 @@ sign_in_btn.addEventListener("click", () => {
 });
 
 
-window.onload = function() {
-  let video = document.getElementById("intro-video");
+document.addEventListener("DOMContentLoaded", function () {
+  let video = document.getElementById("introVideo");
 
-  video.onended = () => {
-    video.classList.add("hidden"); // Faz o vídeo desaparecer suavemente
+  if (!video) {
+    console.error("Elemento #introVideo não encontrado!");
+    return;
+  }
 
-    setTimeout(() => {
-      video.remove(); // Remove do DOM completamente após a transição
-    }, 500); // Tempo para dar o fade-out
+  video.onended = function () {
+    console.log("Vídeo finalizado!");
+    video.style.display = "none"; // Oculta o vídeo após o término
   };
-};
-
-  
+});
