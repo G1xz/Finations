@@ -11,21 +11,29 @@
     />
   </head>
   <body>
+    <div id="video-container">
+      <video id="introVideo" autoplay muted playsinline>
+
+        <source src="Img/logo_final.webm" type="video/webm" />
+      </video>
+      
+    </div>
+    
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
           <form action="#" class="sign-in-form">
-            <h2 class="title">Sign in</h2>
+            <h2 class="title">Login</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" placeholder="Usuário" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Senha" />
             </div>
             <input type="submit" value="Login" class="btn solid" />
-            <p class="social-text">Or Sign in with social platforms</p>
+            <p class="social-text">Ou faça login com outras plataformas</p>
             <div class="social-media">
               <a href="#" class="social-icon">
                 <i class="fab fa-facebook-f"></i>
@@ -42,10 +50,11 @@
             </div>
           </form>
           <form action="#" class="sign-up-form">
-            <h2 class="title">Sign up</h2>
+            <h2 class="title">Registre-se</h2>
+
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" placeholder="Usuário" />
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
@@ -53,10 +62,10 @@
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Senha" />
             </div>
-            <input type="submit" class="btn" value="Sign up" />
-            <p class="social-text">Or Sign up with social platforms</p>
+            <input type="submit" class="btn" value="Registre-se" />
+            <p class="social-text">Ou registre-se com outras plataformas</p>
             <div class="social-media">
               <a href="#" class="social-icon">
                 <i class="fab fa-facebook-f"></i>
@@ -78,27 +87,26 @@
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <h3>New here ?</h3>
+            <h3>Novo por aqui?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              Não perca tempo!!! <br />
+              Comece agora a organizar suas finanças de forma simples e
+              eficiente.
             </p>
             <button class="btn transparent" id="sign-up-btn">
-              Sign up
+              Registre-se
             </button>
           </div>
           <img src="img/graph.svg" class="image" alt="" />
         </div>
         <div class="panel right-panel">
           <div class="content">
-            <h3>One of us ?</h3>
+            <h3>Um de nós ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Faça login na sua conta e aproveite todos os benefícios agora
+              mesmo!
             </p>
-            <button class="btn transparent" id="sign-in-btn">
-              Sign in
-            </button>
+            <button class="btn transparent" id="sign-in-btn">Sign in</button>
           </div>
           <img src="img/suit.svg" class="image" alt="" />
         </div>
@@ -106,5 +114,11 @@
     </div>
 
     <script src="app.js"></script>
+
+    <div id="dashboard" style="display: none;">
+      <h1>Bem-vindo ao seu Gerenciador de Gastos!</h1>
+      <button onclick="logout()">Sair</button>
+    </div>
+    
   </body>
 </html>

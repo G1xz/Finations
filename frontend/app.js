@@ -9,3 +9,18 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
+
+
+window.onload = function() {
+  let video = document.getElementById("intro-video");
+
+  video.onended = () => {
+    video.classList.add("hidden"); // Faz o vídeo desaparecer suavemente
+
+    setTimeout(() => {
+      video.remove(); // Remove do DOM completamente após a transição
+    }, 500); // Tempo para dar o fade-out
+  };
+};
+
+  
