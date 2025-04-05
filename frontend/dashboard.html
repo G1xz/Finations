@@ -1,95 +1,333 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Financeiro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            height: 60px;
-            justify-content: space-between;
-        }
-        .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .floating-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .img-top{
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 40px;
-            margin-left: 20px;
-        }
-        .logo-header{
-            height:70px ;
-        }
-        .foto-nome{
-            display: flex;
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        }
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+      body {
+        background-color: #f9f9f9;
+        font-family: "Poppins", sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        background-color: #f5f5f5;
+        color: #333;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex-wrap: nowrap;
+      }
+
+      .img-top {
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 15px;
+      }
+
+      .logo-header {
+        height: 60px;
+      }
+
+      .foto-nome {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+
+      .chart-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        flex-grow: 1;
+        width: 100%;
+      }
+
+      .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .switch-finations {
+        background-color: #e0e0e0;
+        border-radius: 60px;
+        display: flex;
+        height: 50px;
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .switch-finations .toggle {
+        position: absolute;
+        width: 48%;
+        height: 87%;
+        background: white;
+        border-radius: 20px;
+        transition: 0.5s;
+        left: 4px;
+      }
+
+      .switch-finations.pressed .toggle {
+        left: calc(100% - 48% - 4px);
+      }
+
+      .switch-finations p {
+        width: 50%;
+        text-align: center;
+        margin: 0;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 2;
+        color: #333;
+      }
+
+      .switch-finations .active {
+        color: #007bff;
+      }
+
+      @media (max-width: 768px) {
+  .header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-header {
+    align-self: auto;
+  }
+}
 
 
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- Header -->
     <div class="header">
-        <div class="foto-nome">
-            <img class="img-top" src="Img/00164-4030314407.png" alt="">
-            <h4>RAFAEL SANTOS DE SANTANTA</h4>
-        </div>
-        <img class="logo-header" src="Img/logo_furina_preta1.png" alt="imagem">
-    </div>
-    
-    <div class="container mt-4">
-        <div class="row">
-            <div> 
-                <h1>teste</h1>
-            </div>
-            <div class="col-md-6 chart-container">
-                <h5>Gastos por Categoria</h5>
-                <canvas id="chartCategoria"></canvas>
-            </div>
-            <div class="col-md-6 chart-container">
-                <h5>Gastos x Renda</h5>
-                <canvas id="chartRenda"></canvas>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-12 chart-container">
-                <h5>Pontos Críticos</h5>
-                <canvas id="chartPontos"></canvas>
-            </div>
-        </div>
+      <div class="foto-nome">
+        <img class="img-top" src="Img/00164-4030314407.png" alt="" />
+        <h4>RAFAEL SANTOS DE SANTANA</h4>
+      </div>
+      <img class="logo-header" src="Img/logo_furina_preta1.png" alt="imagem" />
     </div>
 
+    <!-- Dashboard Layout -->
+    <div class="container mt-4">
+      <div class="row gx-3 gy-3">
+        <!-- Coluna Esquerda -->
+        <div class="col-md-6 d-flex flex-column gap-3">
+          <!-- Switch -->
+          <div class="chart-container">
+            <div class="switch-finations" onclick="toggleSwitch()">
+              <div class="toggle"></div>
+              <p id="gastos" class="active">CONTROLE DE GASTOS</p>
+              <p id="investimentos">INVESTIMENTOS</p>
+            </div>
+          </div>
+
+          <!-- Gastos por Categoria -->
+          <div class="chart-container flex-grow-1">
+            <h5>GASTOS DO MÊS</h5>
+            <canvas id="chartCategoria"></canvas>
+          </div>
+        </div>
+
+        <!-- Coluna Direita -->
+        <div class="col-md-6 d-flex flex-column gap-3">
+          <!-- Gastos x Renda -->
+          <div class="chart-container" style="height: 300px">
+            <h5>GASTOS X RENDA</h5>
+            <canvas id="chartRenda"></canvas>
+          </div>
+          <!-- Pontos Críticos -->
+          <div class="chart-container" style="height: 300px">
+            <h5>PONTOS CRÍTICOS</h5>
+            <canvas id="chartPontos"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão flutuante -->
     <button class="floating-button">+</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Scripts -->
     <script>
+      function toggleSwitch() {
+        let toggle = document.querySelector(".toggle");
+        let container = document.querySelector(".switch-finations");
+        let gastos = document.getElementById("gastos");
+        let investimentos = document.getElementById("investimentos");
+
+        if (container.classList.contains("pressed")) {
+          container.classList.remove("pressed");
+          toggle.style.left = "4px";
+          gastos.classList.add("active");
+          investimentos.classList.remove("active");
+        } else {
+          container.classList.add("pressed");
+          toggle.style.left = "calc(100% - 48% - 4px)";
+          investimentos.classList.add("active");
+          gastos.classList.remove("active");
+        }
+      }
+
+      const ctxCategoria = document.getElementById("chartCategoria");
+      new Chart(ctxCategoria, {
+        type: "doughnut",
+        data: {
+          labels: ["Alimentação", "Transporte", "Lazer", "Contas", "Outros"],
+          datasets: [
+            {
+              label: "Gastos",
+              data: [1200, 600, 300, 800, 200],
+              backgroundColor: [
+                "#ff6384",
+                "#ffcd56",
+                "#36a2eb",
+                "#4bc0c0",
+                "#9966ff",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+      });
+
+      const ctxRenda = document.getElementById("chartRenda");
+      new Chart(ctxRenda, {
+        type: "line",
+        data: {
+          labels: ["Jan", "Fev", "Mar", "Abr", "Mai"],
+          datasets: [
+            {
+              label: "Renda",
+              data: [2500, 2600, 2550, 2700, 2650],
+              fill: false,
+              borderColor: "#00b894",
+              tension: 0.4,
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#00b894",
+              pointRadius: 5,
+              pointHoverRadius: 7,
+            },
+            {
+              label: "Gastos",
+              data: [1800, 1900, 2000, 2100, 1950],
+              fill: false,
+              borderColor: "#d63031",
+              tension: 0.4,
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#d63031",
+              pointRadius: 5,
+              pointHoverRadius: 7,
+            },
+          ],
+        },
+        options: {
+  responsive: true,
+  plugins: {
+    legend: {
+      labels: {
+        color: "#333",
+        font: {
+          weight: "bold",
+        },
+      },
+    },
+  },
+  scales: {
+    x: {
+      type: "category",
+      offset: true, // isso adiciona margem nas bordas
+      ticks: {
+        color: "#333",
+      },
+      grid: {
+        color: "rgba(0,0,0,0.05)",
+      },
+    },
+    y: {
+      beginAtZero: true,
+      ticks: {
+        color: "#333",
+      },
+      grid: {
+        color: "rgba(0,0,0,0.05)",
+      },
+    },
+  },
+},
+
+
+      });
+
+      const ctxPontos = document.getElementById("chartPontos");
+      new Chart(ctxPontos, {
+        type: "bar",
+        data: {
+          labels: ["Alimentacao", "Contas", "Transporte"],
+          datasets: [
+            {
+              label: "Pontos Críticos",
+              data: [1200, 800, 600, ],
+              backgroundColor: ["#c62828", "#ff7e15", "#ffc234"],
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+              ticks: { color: "#333" },
+              grid: { color: "rgba(0,0,0,0.05)" },
+            },
+            y: {
+              ticks: { color: "#333" },
+              grid: { color: "rgba(0,0,0,0.05)" },
+            },
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: "#333",
+              },
+            },
+          },
+        },
+      });
     </script>
-</body>
+  </body>
 </html>
